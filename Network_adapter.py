@@ -9,16 +9,19 @@ if (response == "1"):
     network_name= input("Enter your preffered network name (e.g. eth1) \n ::")
     network_num= input("Please Enter the number after your network name (e.g.1) \n ::")
 
+    #ip link add eth1 type dummy
     os.system("ip link add " + network_name + " type dummy")
+    #ip link show eth1
     os.system("ip link show " + network_name)
-
+    
     network_mac = input("Enter network mac address (e.g. 00:d5:3t:2r:ss:3t) \n ::")
-
+    #ifconfig eth1 hw ether 00:11:22:33:44:55
     os.system("ifconfig " + network_name +" hw ether " + network_mac)
 
     network_ip = input("Enter network ip address (e.g. 192.168.1.2/24) \n ::")
-
+    #ip link add 10.100.10.2/24 brd + dev eth1 label eth1:1
     os.system("ip addr add " + network_ip + " brd + dev " + network_name + " label " + network_name +":" + network_num )
+    #ip link set dev eth1 up
     os.system("ip link set dev " + network_name +" up")
 
     #x = os.system("ip a")
